@@ -236,3 +236,15 @@ end
 
 # Install pythonz Python installation manager
 include_recipe 'pythonz'
+
+# Install the MacTeX distribution (for composing LaTeX)
+
+# We should have already installed the aria2c downloader with
+# homebrew. Since MacTex is huge (about 2.2G), we'll use aria2c to
+# torrent it.
+execute 'torrent MacTeX' do
+  # Make sure to check the integrity, and don't do any seeding.
+  command 'aria2c --check-integrity=true --seed-time=0 ' +
+    'http://www.tug.org/mactex/mactex2013.pkg.torrent'
+  notifies # something
+end
